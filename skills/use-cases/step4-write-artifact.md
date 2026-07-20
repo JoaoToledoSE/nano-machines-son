@@ -56,7 +56,7 @@ Diagrams (mermaid) are **optional** — only include if the user asks; the use c
 
 - Publish with the Artifact tool from the `app/<area>/docs/use-cases/<slug>.html` path. **Revisions must republish the same file path** (same session) or pass the artifact `url` (future sessions) — a new path mints a new URL.
 - Keep `<title>` and favicon stable across republishes.
-- Both files are meant to be **committed** (they're permanent docs, not `reports/` residue) — but committing is the user's call; leave them untracked and say so.
+- Both files are permanent docs (not `reports/` residue) and belong in the repo. Claude never commits them itself — finish by telling the user they're ready to commit (typically alongside the area's docs in the same PR).
 - In chat: link the artifact, lead with what changed, and call out the Step 3 corrections explicitly.
 
 ---

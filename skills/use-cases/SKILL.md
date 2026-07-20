@@ -32,13 +32,13 @@ The published artifact is a human-facing **projection** of the HTML, not the sys
 
 ## Step 1 — Scope the flow
 
-Read `.claude/skills/use-cases/step1-scope.md` and follow it for `$FLOW`.
+Read `step1-scope.md` (in this skill's directory) and follow it for `$FLOW`.
 
 ---
 
 ## Step 2 — Trace the behavior (backend)
 
-Read `.claude/skills/use-cases/step2-trace-behavior.md` and follow it for `$FLOW`.
+Read `step2-trace-behavior.md` (in this skill's directory) and follow it for `$FLOW`.
 
 ---
 
@@ -46,10 +46,10 @@ Read `.claude/skills/use-cases/step2-trace-behavior.md` and follow it for `$FLOW
 
 > Runs in parallel with nothing — it depends on Step 2's map of which surfaces exist. Its findings routinely **correct** Step 2 assumptions about what users actually see.
 
-Read `.claude/skills/use-cases/step3-trace-ui.md` and follow it for `$FLOW`.
+Read `step3-trace-ui.md` (in this skill's directory) and follow it for `$FLOW`.
 
 ---
 
 ## Step 4 — Write and publish the artifact
 
-Read `.claude/skills/use-cases/step4-write-artifact.md` and follow it for `$FLOW`.
+Read `step4-write-artifact.md` (in this skill's directory) and follow it for `$FLOW`.
