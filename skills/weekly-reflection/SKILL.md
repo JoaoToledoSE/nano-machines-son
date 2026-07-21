@@ -1,6 +1,6 @@
 ---
 name: weekly-reflection
-description: Write Joao's end-of-week personal reflection — a warm, journal-style review of the work week (wins, key decisions, challenges, time & energy, what carries into next week) gathered from Google Calendar, Slack, Gmail, GitHub, and Jira, saved as a one-page PDF. Use whenever the user asks for a weekly reflection, weekly summary, end-of-week review, "wrap up my week", "how did my week go", or when a scheduled Friday weekly-reflection task fires. This is a personal processing tool for Joao, NOT a status report for management.
+description: Write Joao's end-of-week personal reflection — a warm, journal-style review of the work week (wins, key decisions, challenges, time & energy, what carries into next week) gathered from Google Calendar, Slack, Gmail, GitHub, and Jira, published as a page in his personal Notion. Use whenever the user asks for a weekly reflection, weekly summary, end-of-week review, "wrap up my week", "how did my week go", or when a scheduled Friday weekly-reflection task fires. This is a personal processing tool for Joao, NOT a status report for management.
 ---
 
 # Weekly Reflection
@@ -50,7 +50,9 @@ Don't filter by project — Joao's home project is QPE (PAC team / Cobalt Squad)
 
 ### 6. Last week's reflection (continuity)
 
-Read the most recent `.md` in `~/Documents/weekly-reflections/`. Check its "Carrying Into Next Week" list and note follow-through (done / moved forward / still open) in this week's reflection. This is what turns consecutive reflections into a running journal instead of isolated snapshots. If the directory is empty, this is the first run — skip silently.
+Load the Notion tools with ToolSearch (search "notion"). Fetch the **Weekly Reflections** parent page (ID `3a45642827bf815a97e9fcd14fd82343`, in Joao's personal workspace) and open its most recent child page — children are titled `Weekly Reflection — YYYY-MM-DD` and listed oldest-first, so the last one is the latest. Check its "Carrying Into Next Week" list and note follow-through (done / moved forward / still open) in this week's reflection. This is what turns consecutive reflections into a running journal instead of isolated snapshots.
+
+If Notion is unreachable, fall back to the most recent `.md` in `~/Documents/weekly-reflections/` (where failed publishes land). If neither source has an entry, this is the first run — skip silently.
 
 ## Output
 
@@ -70,14 +72,14 @@ Read the most recent `.md` in `~/Documents/weekly-reflections/`. Check its "Carr
 
 Warm and reflective — a thoughtful journal entry, not a corporate report. Use Joao's actual context (project names, people, ticket keys) so it feels personal and useful. Roughly one page of content total.
 
-### Files
+### Publishing
 
-1. Write the markdown to `~/Documents/weekly-reflections/YYYY-MM-DD-weekly-reflection.md` (today's date). Always write the `.md` — it's the source next week's run reads for continuity. Create the directory if it doesn't exist.
-2. Render the same content as a PDF at `~/Documents/weekly-reflections/YYYY-MM-DD-weekly-reflection.pdf` using the `anthropic-skills:pdf` skill.
-3. End the chat turn with a short TLDR of the week and the paths to both files.
+1. Create a child page under the **Weekly Reflections** Notion parent page (ID `3a45642827bf815a97e9fcd14fd82343`), titled `Weekly Reflection — YYYY-MM-DD` (today's date), icon 📝. The page content is the five sections in Notion-flavored markdown — don't repeat the title in the body.
+2. If the Notion write fails for any reason, save the markdown to `~/Documents/weekly-reflections/YYYY-MM-DD-weekly-reflection.md` instead and say so — that fallback file is what the continuity step checks after Notion. Never let a Notion outage lose the reflection.
+3. End the chat turn with a short TLDR of the week and the Notion page URL (or the fallback file path).
 
 ## Setup requirements
 
-- **Google Calendar, Gmail, and Slack connectors** — added via the Claude desktop app's connector settings. Until they're connected, runs degrade to GitHub + Jira with a missing-sources footnote.
+- **Google Calendar, Gmail, Slack, and Notion connectors** — added via the Claude desktop app's connector settings. Until a source connector works, runs degrade with a missing-sources footnote; if Notion is down, output falls back to a local `.md`.
 - **`gh` CLI** authenticated (already true on this machine).
 - **Atlassian (Jira) MCP** connected (already true in this environment).
