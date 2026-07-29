@@ -42,4 +42,5 @@ Senior Full Stack Engineer. Primary stack: Python/Django, React/TypeScript.
 
 - Working notes and specs go in `reports/{TICKET-ID}/` (always gitignored).
 - Before creating a PR: run lints and tests locally first.
+- When dispatching a code-review subagent via `superpowers:requesting-code-review`, prepend to the reviewer prompt: "First read `~/.claude/skills/reviewing-the-decision-not-the-diff/SKILL.md` and run its pass; report inside the template's output slots."
 - Confirm before any irreversible or high-blast-radius action (git push, migrations, deletes).
