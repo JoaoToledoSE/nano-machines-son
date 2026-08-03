@@ -25,7 +25,7 @@ Working notes: `reports/use-cases-<slug>-<YYYY-MM-DD>/` (gitignored). **Final ou
 ```
 app/<area>/docs/use-cases/<slug>.md     # canonical record — engineering trace with path — Symbol citations
 app/<area>/docs/use-cases/<slug>.html   # artifact source — plain-language + screenshots, republishes to the same URL
-app/<area>/docs/use-cases/<slug>/       # committed capture set: NN-<state>.png, referenced by both files above
+app/<area>/docs/use-cases/<slug>/       # capture set NN-<state>.png — committed ONLY for the HTML-artifact projection; a Confluence projection stores captures as page attachments instead (never commit them — screenshots rot with the UI and binaries persist in monorepo history; the MD ledger pins attachment names + provenance)
 ```
 
 The published artifact is a human-facing **projection** of the HTML, not the system of record. If the area has a `STEERING.md`, add a pointer to the `.md` there.

@@ -42,7 +42,7 @@ The browser must be pointed at **the code ref being documented, backed by a loca
 
 ### 3c. Session rules
 - Fix the viewport before the first shot (e.g. 1280×800, device-pixel-ratio 1) and keep it for the whole session — mixed sizes read as sloppy in the doc. Default (light) theme unless the flow is theme-specific.
-- Drive each planned state and screenshot it to the scratch/session directory first; **curate** the finals into `app/<area>/docs/use-cases/<slug>/NN-<state>.png` (numbered in journey order, kebab-case state names). Not every shot lands in the doc.
+- Drive each planned state and screenshot it to the scratch/session directory first; **curate** the finals as `NN-<state>.png` (numbered in journey order, kebab-case state names). Their destination depends on the projection (step 4 §2): committed image dir for an HTML artifact, page attachments for a Confluence page. Not every shot lands in the doc.
 - Transient UI (toasts, auto-dismissing banners): screenshot immediately, and treat the network request (2xx save) as ground truth if the toast is gone.
 - **Data hygiene**: captures use local seed data only. Nothing resembling a real client's name, logo, or production data may appear — re-seed or rename before capturing, never retouch the image.
 
