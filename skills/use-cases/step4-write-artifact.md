@@ -1,66 +1,62 @@
-# Step 4 — Write and Publish the Artifact
+# Step 4 — Write the MD and publish the Confluence page
 
-Compose **two deliverables** from the consolidated Step 2/3 findings: the canonical MD record (for LLMs + engineers) and the HTML artifact (for humans). MD first — it's the system of record; the HTML is its plain-language projection.
+Exactly **two deliverables, always**: the canonical MD record (for engineers and future LLM sessions) and its Confluence page (for Product/CS/Support). MD first — it is the system of record; the page is its plain-language projection. Nothing else is produced: no HTML file, no published artifact, no third format.
 
 ---
 
 ## 0. The canonical MD record (write this first)
 
-Write `app/<area>/docs/use-cases/<slug>.md` — the engineering trace. This is what future Claude sessions and engineers will grep and cite; optimize for signal density, not presentation:
+Write `app/<area>/docs/use-cases/<slug>.md` — the engineering trace. Optimize for signal density; future sessions and engineers will grep and cite it. Reference example (validated end-to-end): quorum-site `app/pac/authorized_contribution/docs/use-cases/historical-pledge-import-to-actions.md`.
 
-- Header block: what the doc is, the artifact URL (so any session can republish in place), scope + traced ref/date, assumptions.
-- **Capture ledger** (from Step 3): state → image file → `CAPTURED` / `CAPTURED (forced: <method>)` / `UNREACHABLE — <why>`. Screenshots live in `app/<area>/docs/use-cases/<slug>/` and are referenced with relative paths so they render on GitHub.
-- Architecture in one paragraph; journey overview (numbered).
-- One section per UC: preconditions (flags, org settings, model fields — with **where each is enforced**), flow steps with `path — Symbol` citations (symbols, not line numbers — they drift), exceptions with verbatim backend messages **and** what the user actually sees.
-- The Step 3 corrections section (backend-vs-frontend mismatches) — the highest-value content.
-- Configuration reference table; explicit external/unverified list.
-- Placement rule (per AIDLC / PLAYBOOK): capability behavior docs are **co-located with the code** (`app/<area>/docs/use-cases/`). Never `aidlc-docs/areas/` (reserved for Intent working docs / the single master-index file). If the area has a `STEERING.md`, add a one-line pointer to this doc; do NOT create a steering trio just for this.
+Structure:
 
----
+- **H1** `Use cases: <flow>`.
+- **Header blockquote**: *What this is* (one paragraph; names the Confluence projection and the area STEERING/ADR); *Traced ref* (commit, date, merge status — updated if the ref merges later); *Companion artifacts* (the Confluence page URL + the note that captures live as its attachments).
+- **Capture ledger**: one environment line (stack/ref, accounts used, dev-only chrome removed), then a table `# | Image | State | Status` where Status is the Step 3 honesty ledger (`CAPTURED` / `CAPTURED (forced: <method>)`), plus rows for `UNREACHABLE` states. Every filename in the ledger is a page-attachment name and **must resolve to an existing attachment**.
+- **Architecture in one paragraph** (cite the area `STEERING.md` for depth).
+- **Journey overview** (numbered).
+- **One section per UC**: Who; preconditions table with **where each is enforced**; flow steps with `path — Symbol` citations (symbols, not line numbers — they drift); exceptions with verbatim backend messages **and** what the user actually sees. Operational/product facts the code can't show (e.g. "only the PS team runs this") go in a clearly-marked note with their source.
+- **The Step 3 corrections section** (backend-vs-frontend mismatches) — the highest-value content.
+- **Configuration reference table**; explicit **external/unverified** list.
+- Placement rule (per AIDLC / PLAYBOOK): capability behavior docs are **co-located with the code** (`app/<area>/docs/use-cases/`). Never `aidlc-docs/areas/`. If the area has a `STEERING.md`, add a one-line pointer to this doc; do NOT create a steering trio just for this.
 
-## 1. Document structure (HTML)
+## 1. The Confluence page (exact format)
 
-Write `app/<area>/docs/use-cases/<slug>.html` (same directory as the MD; put the artifact URL in an HTML comment at the top). Load the `artifact-design` skill before writing (required by the Artifact tool). Structure, in order:
+Create it in the team's Confluence space, titled **"<Feature> — How It Works"**. Reference example (validated by Product review): *Historical Pledge Import (Authorized Contributions) — How It Works* in the DEVTEAM space. Structure, in order:
 
-1. **Header**: actor-first title ("How a supporter donates by credit card on…"), one-line scope, date.
-2. **"Who's involved"**: the 2–3 parties with one-phrase roles, plus the single most load-bearing fact of the flow (e.g. "Quorum never sees the card number").
-3. **Theme callout**: screens use the product's default theme (name the default hex values); orgs customize branding — "layout and flow exact, branding default".
-4. **Use cases** (the core), in journey order — entry/sign-in variants first, gates second, the headline flow last. Each UC:
-   - `UC-n — <actor-first title>` + a category chip (Sign-in / Eligibility / Donation…)
-   - **Who**: one line.
-   - **Before this can happen**: checkbox-style precondition list (plain language; assumptions from Step 1 appear here as single lines).
-   - **Step by step**: numbered; steps executed by an external system get a visual "external" marker.
-   - **What the user sees**: real screenshots with numbered captions (see §2).
-   - **When it doesn't work**: enumerated failure cases given the same weight and anatomy as the happy path — one numbered/titled case per failure, each consisting of: what you see (the message the user *actually* sees, screenshot when captured) → what it means → what to do. Not a lumped table, not prose blobs.
-   - Callouts for the non-obvious facts (e.g. "signing in ≠ allowed to donate").
-5. **Admin checklist table**: what has to be configured, where, in plain language.
-6. **Footer scope note**: what is external/unverified; where the engineering-level trace lives.
+1. **Status line**: a `PENDING VALIDATION` status chip · `Audience: <who>` · Jira ticket (inline card) · Epic (inline card) · PRD link.
+2. **`What this feature does`** — 2–3 plain sentences, then the numbered outcomes ("each imported pledge is: 1. recorded in X, 2. turned into Y"). No meta commentary — no "newly built", no dates, no provenance.
+3. **`Who's involved`** — the 2–3 parties with one-phrase roles, **operationally true** (who actually performs the flow — confirm with the feature owner — not whoever the gate theoretically permits).
+4. **`Before <the flow> can happen`** — a checkbox task-list of preconditions in the reader's terms.
+5. **`Step by step — the happy path`** — bold-numbered paragraph steps ("**1. Pick the upload type**. …"); system-performed steps carry an *(automatic)* marker; screenshots embedded at their steps.
+6. **`Where <the results> show up`** — a bullet per surface, screenshots, then "worth knowing" bullets (each expressed in reader terms, e.g. "grids show the historical date; the payroll report shows the import date").
+7. **`When it doesn't work — the failure cases`** — one intro line carrying the global guarantee ("failures are always per-row — one bad row never stops the rest"), then **`Case N — <title>`** (heading 3) per failure, each an ordered list with the happy path's anatomy: *what you see* (the message the user actually sees, quoted; screenshot when captured) → *what it means* → *what to do*. Not a lumped table, not prose blobs.
+8. **`What this feature does NOT do`** — bullets, with follow-up ticket links where work is deferred.
 
-Diagrams (mermaid) are **optional** — only include if the user asks; the use cases + mockups are the deliverable.
+Hard rules for the page body:
+
+- **It is the least technical artifact — only what the audience acts on.** System guarantees are expressed inside the step or failure case they affect, in reader terms; a guarantee never gets its own callout panel. No code symbols, endpoints, flags, repo paths, PR numbers, or capture methodology anywhere on the page — provenance lives exclusively in the MD, which links the page (engineers find the page from the MD, not the reverse).
+- Every image is an attachment embedded as **`mediaSingle` with `layout: "wide"`** (full-size inline; media-groups render as click-to-open thumbnails — wrong for a screenshot doc), captioned below in italics: *"Screenshot N — <state>"*.
 
 ## 2. Screenshot rules
 
-- Every image in the deliverables is a **real capture** from Step 3's curated set — never a reconstruction, never retouched. If a state has no capture, it gets a text panel ("runs in <external system> — not capturable locally" or the ledger's UNREACHABLE reason), not an invented visual.
-- Caption each screenshot with its state; a forced state's caption carries the `(forced)` marker — the doc never presents a forced state as organic.
-- Captures show local seed data; the doc notes that orgs customize branding/data ("layout and flow exact, data is seeded sample data"). Nothing resembling a real client may appear.
-- **Where the pixels live depends on the projection.** HTML-artifact projection: the capture set is committed at `app/<area>/docs/use-cases/<slug>/NN-<state>.png`, the MD references the PNGs by relative path (renders on GitHub), and the HTML embeds them base64 (the CSP blocks remote images). **Confluence projection: captures are page attachments ONLY — never committed to the repo** (screenshots rot with the UI; binaries persist in monorepo history forever). The MD's capture ledger pins each attachment name + provenance, and **every ledger row must resolve to an existing attachment** — a capture trimmed from the page body still gets attached (un-embedded) so the ledger never points at nothing.
-- **A Confluence projection is not done until the captures are ON the page.** Filename-labeled placeholder slots are an intermediate editing state, never the deliverable — the page ships with the images attached and embedded at their journey positions.
-- **Confluence attachment recipe (proven).** The Atlassian MCP cannot create attachments, and data-URIs can't carry real screenshots through tool arguments (base64 ≈ 1 token/char — measured). Instead: (1) upload each image via the Confluence REST API with the user's existing API token (commonly `ATLASSIAN_API_TOKEN` in their shell rc — read it into a shell variable, never print it): `curl -u "<email>:$TOKEN" -H "X-Atlassian-Token: nocheck" -F "file=@<img>.png" https://<site>/wiki/rest/api/content/<pageId>/child/attachment`, capturing `extensions.fileId` from each JSON response; (2) embed each image where it belongs — **as a `mediaSingle` node (ADF, `layout: "wide"`), not `mediaGroup`**: groups render as click-to-open thumbnails, singles render full-size inline, which is what a screenshot doc needs. The MCP's html dialect only writes media-groups, so either write the body via `contentFormat: "adf"`, or publish html media-groups first and convert them with a small REST ADF transform (GET `api/v2/pages/<id>?body-format=atlas_doc_format`, splice each `mediaGroup` into per-media `{"type":"mediaSingle","attrs":{"layout":"wide"},"content":[media]}`, PUT with version+1); (3) verify by re-fetching the page (ADF) and counting mediaSingle nodes. If the user has no API token anywhere, report the page as **incomplete/blocked** naming the missing images — never report a placeholder page as published-done.
-- Keep screenshots light-theme depictions; the doc chrome itself must support light + dark.
+- Every image on the page is a **real capture** from Step 3's curated set — never a reconstruction, never retouched. A state with no capture gets a text panel ("runs in <external system>") — never an invented visual.
+- A forced state's caption carries the `(forced)` marker — the page never presents a forced state as organic.
+- Captures show local seed data; nothing resembling a real client may appear (re-seed and re-capture, never retouch).
+- **Captures are page attachments ONLY — never committed to the repo** (screenshots rot with the UI; binaries persist in monorepo history forever). Every MD-ledger row must resolve to an existing attachment; a capture trimmed from the page body still gets attached (un-embedded) so the ledger never points at nothing.
+- **Attachment + embed recipe (proven).** The Atlassian MCP cannot create attachments, and data-URIs can't carry real screenshots through tool arguments (base64 ≈ 1 token/char — measured). Instead: (1) upload each image via the Confluence REST API with the user's existing API token (commonly `ATLASSIAN_API_TOKEN` in their shell rc — read into a shell variable, never print it): `curl -u "<email>:$TOKEN" -H "X-Atlassian-Token: nocheck" -F "file=@<img>.png" https://<site>/wiki/rest/api/content/<pageId>/child/attachment`, capturing `extensions.fileId` from each response; (2) embed each image as `{"type":"mediaSingle","attrs":{"layout":"wide"},"content":[{"type":"media","attrs":{"type":"file","id":"<fileId>","collection":"contentId-<pageId>"}}]}` — via a REST ADF transform (GET `api/v2/pages/<id>?body-format=atlas_doc_format`, splice, PUT version+1), since the MCP's html dialect only writes media-groups; (3) verify by re-fetching the ADF and counting mediaSingle nodes.
 
-## 3. Plain-language rules (unless Step 1 said engineering audience)
+## 3. Plain-language rules (the page, always)
 
-- No code symbols, endpoints, model names, or feature flags in the body. Translate: token → "secure one-time pass (60 seconds, single use)"; replication + cron → "syncs back automatically within minutes"; mirror table → "the PAC's member list".
-- Keep verbatim **user-facing** copy in quotes — that's the one place exactness beats plainness.
-- Surface the Step 3 corrections prominently (callouts): "the user sees X even though the real reason is Y" is what makes the doc useful to Support.
-- **A Confluence projection is the least technical artifact — its body is what the audience acts on.** The page consists of: the journey steps with screenshots, what the user sees at each one, what to do when something fails, and where things become visible afterwards. System guarantees are expressed inside the step or failure entry they affect, in the reader's terms ("re-uploading the same file is safe", "one bad row doesn't stop the rest") — a guarantee never gets its own callout panel. Provenance — repo paths, PR numbers, capture methodology, the trace-doc pointer — appears **nowhere on the page**: it lives in the in-repo MD (header block + capture ledger), and the MD links the page. Engineers find the page from the MD, not the reverse.
+- No code symbols, endpoints, model names, or feature flags in the body. Translate: token → "secure one-time pass (60 seconds, single use)"; replication + cron → "syncs back automatically within minutes".
+- Keep verbatim **user-facing** copy in quotes — the one place exactness beats plainness.
+- Surface the Step 3 corrections where the reader hits them ("the screen shows a generic message; the real cause is X — check X first") — that's what makes the page useful to Support.
 
-## 4. Publish
+## 4. Publish and iterate
 
-- Publish with the Artifact tool from the `app/<area>/docs/use-cases/<slug>.html` path. **Revisions must republish the same file path** (same session) or pass the artifact `url` (future sessions) — a new path mints a new URL.
-- Keep `<title>` and favicon stable across republishes.
-- Both files are meant to be **committed** (they're permanent docs, not `reports/` residue) — but committing is the user's call; leave them untracked and say so.
-- In chat: link the artifact, lead with what changed, and call out the Step 3 corrections explicitly.
+- Create once (`createConfluencePage`, html dialect is fine for the text skeleton); **every subsequent change targets the same pageId** — surgical edits via the REST ADF transform with a version message per change. Never mint a second page.
+- The `PENDING VALIDATION` chip stays until the feature owner validates; then flip it and link the page from the Jira ticket and epic.
+- The MD ships through the normal PR flow (link the Confluence page in the PR body); the page is updated in place as review feedback lands — and the MD is updated in the same pass when a page correction reveals a fact the trace lacked (e.g. an operationally-true actor).
 
 ---
 
@@ -68,13 +64,14 @@ Diagrams (mermaid) are **optional** — only include if the user asks; the use c
 
 | Issue | Correct |
 |---|---|
-| Drafting the whole doc in context, writing at the end | Write MD and HTML incrementally; a compaction mid-draft loses everything |
-| Republishing under a new filename | Same file path = same URL; new path = new artifact |
-| Treating the artifact as the record | The MD is canonical; the artifact/HTML is the human-facing projection |
-| Putting the doc in `aidlc-docs/areas/` | That tree is for Intent working docs; behavior docs co-locate with the code (`app/<area>/docs/use-cases/`) |
-| Burying the behavior corrections | They're the headline — put them in callouts and in the chat summary |
+| Drafting the whole doc in context, writing at the end | Write the MD incrementally; a compaction mid-draft loses everything |
+| Creating a new page for a revision | Same pageId, version messages — one page, updated in place |
+| Treating the page as the record | The MD is canonical; the page is the plain-language projection |
+| Putting the doc in `aidlc-docs/areas/` | Behavior docs co-locate with the code (`app/<area>/docs/use-cases/`) |
+| Burying the behavior corrections | They're the headline — in the failure cases and in the chat summary |
 | Synthesizing a visual for an uncaptured state | Text panel with the UNREACHABLE reason — images are real captures only |
-| Publishing a Confluence projection with 📸 placeholder slots | The page isn't done until images are attached + embedded — REST-attach with the user's API token, then MCP-embed by fileId (see §2 recipe) |
-| Trying to push image bytes through MCP tool arguments | base64 ≈ 1 token/char — physically impossible for real screenshots; attach via REST, embed by fileId |
-| Real-client-like data visible in a capture | Re-seed/rename and re-capture — never retouch the image, never ship it |
-| Hot-linking screenshots from an external host | Commit them next to the doc; embed base64 (artifact) or attach (Confluence) |
+| Real-client-like data visible in a capture | Re-seed/rename and re-capture — never retouch, never ship it |
+| Committing capture PNGs to the repo | Page attachments only; the MD ledger pins names + provenance |
+| Trying to push image bytes through MCP tool arguments | base64 ≈ 1 token/char — physically impossible; REST-attach, embed by fileId |
+| Publishing with 📸 placeholder slots | The page isn't done until every image is attached + embedded (mediaSingle wide) |
+| Engineering framing on the page (provenance panels, guarantee callouts, theoretical actors) | Provenance → MD only; guarantees → inline in their step/case; actors → operationally true, confirmed with the owner |

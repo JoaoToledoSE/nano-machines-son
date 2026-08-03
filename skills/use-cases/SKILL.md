@@ -1,6 +1,6 @@
 ---
 name: use-cases
-description: Produce a plain-language use-case document for a product flow — step-by-step use cases with preconditions, exceptions, and real UI screenshots captured from the locally running app via Playwright — published as an HTML artifact the whole team (PM/CS/Support) can read. Use when asked for "use cases", a "user journey", or team-readable documentation of how a feature behaves.
+description: Produce use-case documentation for a product flow — always exactly two deliverables: an in-repo technical MD (the engineering trace) and a Confluence page (plain-language, with real UI screenshots captured from the locally running app via Playwright) the whole team (PM/CS/Support) can read. Use when asked for "use cases", a "user journey", or team-readable documentation of how a feature behaves.
 argument-hint: <flow description> [variants to cover] [assumptions]
 ---
 
@@ -10,7 +10,7 @@ argument-hint: <flow description> [variants to cover] [assumptions]
 
 ## When to use
 
-Someone needs to understand how a flow actually works today — end-to-end, with what the user sees on screen — in language a non-engineer can read. The output is a published artifact: use cases in journey order, each with preconditions, numbered steps, exceptions, and real screenshots of the UI.
+Someone needs to understand how a flow actually works today — end-to-end, with what the user sees on screen — in language a non-engineer can read. The outputs are **exactly two, always**: an in-repo technical MD (the system of record) and a Confluence page in the team space (journey steps, real screenshots, enumerated failure cases). No other format is produced.
 
 ## Prerequisites
 
@@ -20,15 +20,14 @@ Someone needs to understand how a flow actually works today — end-to-end, with
 
 ## Output location
 
-Working notes: `reports/use-cases-<slug>-<YYYY-MM-DD>/` (gitignored). **Final outputs are two committed files, co-located with the code area** (per AIDLC: capability behavior docs follow the code — never `aidlc-docs/areas/`, which is for Intent working docs):
+Working notes: `reports/use-cases-<slug>-<YYYY-MM-DD>/` (gitignored). **Final outputs are exactly two — one committed file plus one Confluence page:**
 
 ```
-app/<area>/docs/use-cases/<slug>.md     # canonical record — engineering trace with path — Symbol citations
-app/<area>/docs/use-cases/<slug>.html   # artifact source — plain-language + screenshots, republishes to the same URL
-app/<area>/docs/use-cases/<slug>/       # capture set NN-<state>.png — committed ONLY for the HTML-artifact projection; a Confluence projection stores captures as page attachments instead (never commit them — screenshots rot with the UI and binaries persist in monorepo history; the MD ledger pins attachment names + provenance)
+app/<area>/docs/use-cases/<slug>.md            # canonical record — engineering trace with path — Symbol citations (committed, co-located with the code per AIDLC; never aidlc-docs/areas/)
+Confluence page "<Feature> — How It Works"     # plain-language projection in the team space; all captures live as its attachments (never committed to the repo)
 ```
 
-The published artifact is a human-facing **projection** of the HTML, not the system of record. If the area has a `STEERING.md`, add a pointer to the `.md` there.
+The page is the human-facing **projection** of the MD; the MD is the system of record and links the page. If the area has a `STEERING.md`, add a pointer to the `.md` there.
 
 ---
 
@@ -52,6 +51,6 @@ Read `.claude/skills/use-cases/step3-trace-ui.md` and follow it for `$FLOW`.
 
 ---
 
-## Step 4 — Write and publish the artifact
+## Step 4 — Write the MD and publish the Confluence page
 
 Read `.claude/skills/use-cases/step4-write-artifact.md` and follow it for `$FLOW`.
