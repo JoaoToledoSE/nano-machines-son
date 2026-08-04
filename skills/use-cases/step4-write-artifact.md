@@ -61,7 +61,10 @@ Hard rules for the page body:
 
 - Create once (`createConfluencePage`, html dialect is fine for the text skeleton); **every subsequent change targets the same pageId** — surgical edits via the REST ADF transform with a version message per change. Never mint a second page.
 - The `PENDING VALIDATION` chip stays until the feature owner validates; then flip it and link the page from the Jira ticket and epic.
-- The MD ships through the normal PR flow (link the Confluence page in the PR body); the page is updated in place as review feedback lands — and the MD is updated in the same pass when a page correction reveals a fact the trace lacked (e.g. an operationally-true actor).
+- The MD ships through the normal PR flow (link the Confluence page in the PR body). **Review feedback updates both artifacts, in whichever direction it lands, in the same pass — never one without the other:**
+  - **MD fix → check the page.** A reviewer catches a wrong citation, a misleading timing claim, or a missing correction in the MD. If the fix changes what a reader would understand about *user-visible behavior* (timing, a status's real meaning, a guarantee) — not a pure code citation/symbol fix, which has no page equivalent by design — find the page's corresponding step/case and fix the same misreading there, translated to plain language (Step 4 §3 rules still apply: no citations, no jargon).
+  - **Page fix → check the MD.** A validator/reader catches a fact the MD's trace lacked (e.g. an operationally-true actor). Fold it into the MD's corresponding section.
+  - **Neither side is done until both agree.** A corrected MD next to a stale page is the same drift this skill exists to prevent — just moved inside one PR instead of spread across two.
 
 ---
 
@@ -80,3 +83,4 @@ Hard rules for the page body:
 | Trying to push image bytes through MCP tool arguments | base64 ≈ 1 token/char — physically impossible; REST-attach, embed by fileId |
 | Publishing with 📸 placeholder slots | The page isn't done until every image is attached + embedded (mediaSingle wide) |
 | Engineering framing on the page (provenance panels, guarantee callouts, theoretical actors) | Provenance → MD only; guarantees → inline in their step/case; actors → operationally true, confirmed with the owner |
+| Fixing a review-flagged MD issue without checking the page | Both artifacts describe the same behavior — a fix in one that isn't mirrored in the other is drift, just faster |
