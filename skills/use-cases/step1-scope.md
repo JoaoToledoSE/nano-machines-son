@@ -9,7 +9,7 @@ Pin down exactly what is being documented before any exploration.
 - **The flow**: one sentence, actor-first ("a supporter donates by credit card on a PAC Action Center").
 - **Variants to cover**: each becomes its own use case (e.g. SSO vs non-SSO login, eligible vs blocked).
 - **Assumptions**: things to take as given, excluded from the use cases (e.g. "the donation form is already configured"). These still appear as one-line preconditions, just not as steps.
-- **Audience**: default is the whole team (plain language). If the user asked for an engineering-level doc, keep code symbols; otherwise they are banned from the final output (Step 4).
+- **Audience**: both are always served, no mode to choose — the in-repo MD carries the engineering trace (code symbols, citations); the Confluence page is plain-language for the whole team (code symbols banned there, Step 4 §3).
 
 If the flow or variants are ambiguous, ask **one** clarifying question now — not during synthesis.
 
