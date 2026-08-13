@@ -22,7 +22,15 @@ Structure:
 
 ## 1. The Confluence page (exact format)
 
-Create it in the team's Confluence space, titled **"<Feature> — How It Works"**. Reference example (validated by Product review): *Historical Pledge Import (Authorized Contributions) — How It Works* in the DEVTEAM space. Structure, in order:
+Create it in the team's Confluence space, titled **"<Feature> — How It Works"**. Reference example (validated by Product review): *Historical Pledge Import (Authorized Contributions) — How It Works* in the DEVTEAM space.
+
+**Placement — the page needs a parent, not just a space.** A use-case page left at whatever default parent the API picks lands outside any team's information architecture, where nobody browsing finds it and nobody owns it. Before creating, resolve the parent in this order and **confirm it with the requester** (a one-line "creating it under X — right place?" is enough, and their answer is durable for the area):
+
+1. An existing **use-case collection page** for the area — a parent whose children are use-case docs (search the space for "Use Cases" / "How It Works" siblings). This is the target shape: use-case pages accumulate under one browsable parent per area.
+2. Failing that, the area's **feature/product documentation hub** in the team space — wherever that team's other feature explainers already live.
+3. If neither exists, propose creating the collection page (named for the area, e.g. *"<Area> Use Cases"*) and ask before creating it — a new top-level page is the requester's call, not yours.
+
+Never accept the space root or an unrelated inherited parent by default. Record the resolved parent so later runs for the same area reuse it without re-asking. Structure, in order:
 
 1. **Status line**: a `PENDING VALIDATION` status chip · `Audience: <who>` · Jira ticket (inline card) · Epic (inline card) · PRD link.
 2. **`What this feature does`** — 2–3 plain sentences, then the numbered outcomes ("each imported pledge is: 1. recorded in X, 2. turned into Y"). No meta commentary — no "newly built", no dates, no provenance.
@@ -59,7 +67,7 @@ Hard rules for the page body:
 
 ## 4. Publish and iterate
 
-- Create once (`createConfluencePage`, html dialect is fine for the text skeleton); **every subsequent change targets the same pageId** — surgical edits via the REST ADF transform with a version message per change. Never mint a second page.
+- Create once (`createConfluencePage`, html dialect is fine for the text skeleton) **with the resolved `parentId` passed at creation** — pass it in the create call rather than relocating afterwards (a later move is a full page update, and the API's default parent is never the right one). If a page does need relocating, `PUT` it with `parentId` plus `version.number + 1` and re-verify the embedded media survived. **Every subsequent change targets the same pageId** — surgical edits via the REST ADF transform with a version message per change. Never mint a second page.
 - The `PENDING VALIDATION` chip stays until the feature owner validates; then flip it and link the page from the Jira ticket and epic.
 - The MD ships through the normal PR flow (link the Confluence page in the PR body). **Review feedback updates both artifacts, in whichever direction it lands, in the same pass — never one without the other:**
   - **MD fix → check the page.** A reviewer catches a wrong citation, a misleading timing claim, or a missing correction in the MD. If the fix changes what a reader would understand about *user-visible behavior* (timing, a status's real meaning, a guarantee) — not a pure code citation/symbol fix, which has no page equivalent by design — find the page's corresponding step/case and fix the same misreading there, translated to plain language (Step 4 §3 rules still apply: no citations, no jargon).
@@ -74,6 +82,7 @@ Hard rules for the page body:
 |---|---|
 | Drafting the whole doc in context, writing at the end | Write the MD incrementally; a compaction mid-draft loses everything |
 | Creating a new page for a revision | Same pageId, version messages — one page, updated in place |
+| Publishing to a space without resolving a parent | The space is not a location — resolve the area's use-case collection (or feature-doc hub), confirm it with the requester, and pass `parentId` at creation |
 | Treating the page as the record | The MD is canonical; the page is the plain-language projection |
 | Putting the doc in `aidlc-docs/areas/` | Behavior docs co-locate with the code (`app/<area>/docs/use-cases/`) |
 | Burying the behavior corrections | They're the headline — in the failure cases and in the chat summary |
