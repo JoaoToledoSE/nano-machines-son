@@ -24,7 +24,7 @@ Working notes: `reports/use-cases-<slug>-<YYYY-MM-DD>/` (gitignored). **Final ou
 
 ```
 app/<area>/docs/use-cases/<slug>.md            # canonical record — engineering trace with path — Symbol citations (committed, co-located with the code per AIDLC; never aidlc-docs/areas/)
-Confluence page "<Feature> — How It Works"     # plain-language projection in the team space; all captures live as its attachments (never committed to the repo)
+Confluence page "<Feature> — How It Works"     # plain-language projection, parented under the area's use-case collection in the team space (resolve + confirm the parent — Step 4 §1); captures live as its attachments (never committed to the repo)
 ```
 
 The page is the human-facing **projection** of the MD; the MD is the system of record and links the page. If the area has a `STEERING.md`, add a pointer to the `.md` there.
