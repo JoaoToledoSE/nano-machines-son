@@ -32,6 +32,13 @@ Senior Full Stack Engineer. Primary stack: Python/Django, React/TypeScript.
 - Use the minimum complexity needed. Don't over-engineer or add abstractions prematurely.
 - Never add features, refactors, or "improvements" beyond what was asked.
 
+## Scope Discipline
+
+- Deliver exactly what the ticket/request asks. Every deliverable in a plan or PR must trace to an explicit request; if it doesn't, it's an observation, not work.
+- Prevention, guardrails, hardening, behavior modification, and follow-up tickets are the engineer's responsibility to decide — never add, file, or promise them proactively.
+- When you spot such an improvement, surface it as an observation and ask: worked now, ticketed, or dropped? Act only on an explicit yes.
+- Never bake follow-up promises into PR bodies or stakeholder-facing comments without prior approval.
+
 ## Exploration
 
 - For any codebase exploration spanning more than 3–4 files or an unfamiliar area, delegate to an Explore subagent.
