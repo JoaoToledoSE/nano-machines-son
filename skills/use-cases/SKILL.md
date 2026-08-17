@@ -14,7 +14,7 @@ Someone needs to understand how a flow actually works today — end-to-end, with
 
 ## Prerequisites
 
-- Working tree on an up-to-date `master` (or explicitly note which ref is being documented — a stale branch documents behavior that isn't in production).
+- Working tree on an up-to-date default branch (or explicitly note which ref is being documented — a stale branch documents behavior that isn't in production).
 - **The flow's app must be runnable locally — screen captures are mandatory; there is no mockup path.** Visuals in the deliverables are real Playwright screenshots of the running app, never reconstructions. If the project defines an app-driving skill (stack check, login, feature flags — e.g. quorum-site's `verify-frontend`), follow its procedures instead of improvising.
 - Exploration is delegated to parallel Explore agents; keep the main context for synthesis. The capture session itself runs in the main context (browser state is interactive).
 

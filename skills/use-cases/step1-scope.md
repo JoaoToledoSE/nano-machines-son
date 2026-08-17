@@ -16,7 +16,7 @@ If the flow or variants are ambiguous, ask **one** clarifying question now — n
 
 ## 2. Orient in the codebase
 
-- Check the ref: `git status` — if not on up-to-date `master`, tell the user which ref is being documented.
+- Check the ref: resolve the default branch at runtime (`gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`), fetch, and compare `HEAD` against it — a bare `git status` names the current branch but establishes neither the default branch nor its freshness. If not on the up-to-date default branch, tell the user which ref is being documented.
 - Read the area's `STEERING.md` (and `CLAUDE.md`/`ADR.md` if present) for every app the flow touches. The steering doc usually names the exact subdirectories, external systems, and gating fields — this makes the Step 2/3 agent prompts dramatically better.
 - Note which parts of the flow live **outside this repo** (external systems, hosted iframes, third-party IdPs). These will be marked "external — illustrative/unverified" throughout; never present their internals as fact.
 
@@ -36,5 +36,5 @@ Write `step1-scope.md` in that directory: flow, actors, outcome surfaces, varian
 |---|---|
 | Jumping straight to grep | Read the area `STEERING.md` first — it names the modules and the external boundaries |
 | Treating a variant as a footnote | Each named variant (SSO/non-SSO, eligible/blocked) is its own use case with its own preconditions |
-| Documenting a feature branch | Use cases describe production behavior — document master, or state the ref explicitly |
+| Documenting a feature branch | Use cases describe production behavior — document the default branch, or state the ref explicitly |
 | Scoping the flow to end at the triggering action | The flow ends where the user sees the result — list the outcome surfaces now, with UI copy / PRD promises as the checklist |
