@@ -37,7 +37,7 @@ Never accept the space root or an unrelated inherited parent by default. Record 
 3. **`Who's involved`** — the 2–3 parties with one-phrase roles, **operationally true** (who actually performs the flow — confirm with the feature owner — not whoever the gate theoretically permits).
 4. **`Before <the flow> can happen`** — a checkbox task-list of preconditions in the reader's terms.
 5. **`Step by step — the happy path`** — **one linear numbered sequence; never split the happy path per use case** (the flow is one journey — per-case enumeration belongs to the failure section, not here): bold-numbered paragraph steps ("**1. Pick the upload type**. …"); system-performed steps carry an *(automatic)* marker; screenshots embedded at their steps. The sequence runs until the user sees the result — the triggering action's confirmation is a middle step, not the end.
-6. **`Where <the results> show up`** — the journey's destination, not an appendix: a bullet per surface, each with its screenshot or an explicit external/unverified note (a listed surface with neither is incomplete), then "worth knowing" bullets (each expressed in reader terms, e.g. "grids show the historical date; the payroll report shows the import date").
+6. **`Where <the results> show up`** — the journey's destination, not an appendix: a bullet per surface, each with its screenshot or an explicit no-image note (external system, unverified, or non-visual — no screen exists, results are consumed programmatically, e.g. via the product's API — say which; a listed surface with neither is incomplete), then "worth knowing" bullets (each expressed in reader terms, e.g. "grids show the historical date; the payroll report shows the import date").
 7. **`When it doesn't work — the failure cases`** — one intro line carrying the global guarantee ("failures are always per-row — one bad row never stops the rest"), then **`Case N — <title>`** (heading 3) — **one case per distinct failure scenario, enumerated with the same discipline as the happy path's steps** — each an ordered list with the happy path's anatomy: *what you see* (the message the user actually sees, quoted; screenshot when captured) → *what it means* → *what to do*. Never lump several failures into one table, panel, or prose blob.
 8. **`What this feature does NOT do`** — bullets, with follow-up ticket links where work is deferred.
 
@@ -49,7 +49,7 @@ Hard rules for the page body:
 
 ## 2. Screenshot rules
 
-- Every image on the page is a **real capture** from Step 3's curated set — never a reconstruction, never retouched. A state with no capture gets a text panel ("runs in <external system>") — never an invented visual.
+- Every image on the page is a **real capture** from Step 3's curated set — never a reconstruction, never retouched. A state with no capture gets a text panel ("runs in <external system>"; "available through the API — no screen to show") — never an invented visual.
 - A forced state's caption carries the `(forced)` marker — the page never presents a forced state as organic.
 - Captures show local seed data; nothing resembling a real client may appear (re-seed and re-capture, never retouch).
 - **Captures are page attachments ONLY — never committed to the repo** (screenshots rot with the UI; binaries persist in monorepo history forever). Every MD-ledger row must resolve to an existing attachment; a capture trimmed from the page body still gets attached (un-embedded) so the ledger never points at nothing.
