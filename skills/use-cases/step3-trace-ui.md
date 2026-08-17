@@ -55,7 +55,7 @@ Every state from the capture plan gets exactly one line:
 
 - **CAPTURED** — reached organically with a normal account.
 - **CAPTURED (forced: <method>)** — real screenshot of a state forced locally (flag flipped, row seeded/edited, remote mocked). The method is part of the record.
-- **UNREACHABLE — <why>** — external system or locally unproducible; the reason names the forcing attempted (or why none exists). The doc gets a text description marked external/unverified. **Never a synthesized visual.**
+- **UNREACHABLE — <why>** — external system, non-visual surface (no screen to capture; the why names how the result was verified instead), or locally unproducible; the reason names the forcing attempted (or why none exists). The doc gets a text description naming which class — external, unverified, or non-visual — never external/unverified for an owned, verified surface. **Never a synthesized visual.**
 
 One surface never stands in for another unless both render the **same fact**: a marker/badge/status on surface A is not evidence of the values or content surface B shows. Each planned state gets its own line for the fact it shows — "already evidenced elsewhere" is not a ledger status.
 
