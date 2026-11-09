@@ -6,7 +6,7 @@ Confirm both sources exist, pin the versions read, settle the framing, and creat
 
 ## 1. Find and read both sources
 
-- **PRD:** a Confluence page. Read it with the Atlassian MCP's `getConfluencePage` (`contentFormat: "markdown"`). Record the page version and last-edited date the tool returns, and the PRD owner.
+- **PRD:** a Confluence page. Read its full body as markdown: `getConfluencePage` with `contentFormat: "markdown"` on the claude.ai Atlassian connector, or `getConfluenceContent` with full detail on the Atlassian plugin, which returns a summary unless asked. Check that you have the whole page, not an excerpt, before going on. Record the page version and last-edited date the tool returns, and the PRD owner.
 - **Intent Brief:** a file in one of two repos. Briefs live both in this repo's `aidlc-docs/` folder and in the `QuorumUS/aidlc-docs` repo, so a path starting with `aidlc-docs/` can mean either. Start from the path the user gives and don't invent one; if the brief isn't in one repo, look in the other before calling it missing. Fetch the repo that holds it and read the brief from the ref it lives on (`git show <ref>:<path>` in a clone, or `gh api` without one). Record the repo, the ref and the short SHA, and the Tech Lead named in the brief's header.
 
 Stop when either is missing, and say why:

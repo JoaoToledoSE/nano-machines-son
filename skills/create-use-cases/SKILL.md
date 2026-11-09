@@ -20,7 +20,7 @@ The doc holds use cases only. Divergences, decisions and open questions are trac
 
 These apply to every line you write, in every step. A use-case doc gets read as the spec, so anything it states without a source becomes a requirement nobody decided.
 
-1. **Every line names its source**, as a tag at the end of the step or case:
+1. **Every line that states behavior names its source**, as a tag at the end of the line:
    - `(PRD § <section>)`: a PRD requirement or decision.
    - `(brief § <section>)`: an Intent Brief decision, failure mode or answered question.
    - `(proposal — from <basis>)`: your draft, with what it was inferred from. It stays a proposal until its owner writes it into the PRD or the brief.
@@ -40,7 +40,9 @@ These apply to every line you write, in every step. A use-case doc gets read as 
 
 ## Output location
 
-`app/<module>/<feature_package>/use-cases.md`: the folder named like the feature's Python package, with underscores, since `app/` subfolders are packages. Create the folder if no code exists yet. If the package name isn't settled, ask the Tech Lead; if the code lands elsewhere later, the doc moves with it.
+`app/<module>/<feature_package>/use-cases.md`: the folder named like the feature's Python package, with underscores, since `app/` subfolders are packages. Create the folder if no code exists yet, with no `__init__.py` until code lands. If the package name isn't settled, ask the Tech Lead; if the code lands elsewhere later, the doc moves with it.
+
+Why not a `docs/use-cases/` folder: those hold traces of flows already built. This doc specifies code that doesn't exist yet, so it lives in the package that code will fill and moves with it.
 
 The doc is the run's persistence: write each section as soon as it is drafted, so a compaction or an interruption loses nothing.
 
@@ -74,7 +76,7 @@ Read [step4-coverage.md](step4-coverage.md) and follow it.
 
 ## Done when
 
-- Every step and case has a source tag, a divergence marker or a `Not defined` line.
+- Every line that states behavior (journey stage, step, case, outcome surface, negative space, glossary term) has a source tag, a divergence marker or a `Not defined` line.
 - Every divergence between the PRD and the brief that touches a case is flagged in that case, with both sides.
 - Every PRD requirement maps to a case or to "out of scope", with the reason.
 - The user has the list of divergences and `Not defined` questions to take to the PRD owner and the Tech Lead.

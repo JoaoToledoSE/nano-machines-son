@@ -19,7 +19,7 @@
 ### {Flow name: actor and goal}
 
 - **Journey overview:**
-  1. {stage}
+  1. {stage} ({source})
 - **Happy path:**
   1. {step} ({source})
 - **Other cases:**

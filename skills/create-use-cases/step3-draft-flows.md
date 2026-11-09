@@ -16,7 +16,7 @@ Inventory every case the sources imply, then write each flow into the doc.
 
 Use the template's fields: Journey overview, Happy path, Other cases, Outcome surfaces and Negative space. They are the field names of the STEERING.md End-to-end Flows section, so `trace-flow-behavior` can verify this doc after the build.
 
-- Tag every step and case (standing rule 1 in SKILL.md).
+- Tag every line that states behavior: journey stages, steps, cases, outcome surfaces and negative space (standing rule 1 in SKILL.md).
 - Where a divergence from Step 2 touches a case, give both sides with their tags and add `(diverges between PRD and brief)`.
 - Quote on-screen copy only when the PRD or a linked design gives it. Otherwise describe what the message says, without inventing wording.
 - Cite no code for the new behavior; it doesn't exist yet. A `today` tag points at the STEERING flow or the symbol today's behavior was read from.
